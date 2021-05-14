@@ -3,7 +3,9 @@
 </template>
 
 <script>
-export default {};
-</script>
+export default {
+  name: "Home",
 
-<style></style>
+  components: {},
+};
+</script>

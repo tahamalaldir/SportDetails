@@ -1,7 +1,17 @@
 <template>
-  <div>
-    <router-view />
-  </div>
+  <v-app>
+    <v-app-bar app color="dark" dark> </v-app-bar>
+
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
-<style></style>
+<script>
+export default {
+  name: "App",
+
+  data: () => ({}),
+};
+</script>
