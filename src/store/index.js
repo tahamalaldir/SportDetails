@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     mini: false,
+    bodyInformation: [],
   },
   mutations: {
     changeDrawer(state) {
@@ -15,6 +16,14 @@ export default new Vuex.Store({
         state.mini = false;
       }
     },
+    saveBodyInfo(state, payload) {
+      console.log("231");
+      state.bodyInformation.push(payload);
+    },
   },
-  actions: {},
+  actions: {
+    saveBodyInfo({ commit }, payload) {
+      commit("saveBodyInfo", payload);
+    },
+  },
 });

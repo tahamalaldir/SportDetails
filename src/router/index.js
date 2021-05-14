@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import TrainingDetails from "@/views/TrainingDetails.vue";
 import BodyInformation from "@/views/BodyInformation.vue";
+import NewInformation from "@/components/Pages/BodyInformation/NewInformation.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: "/body",
     name: "Body Information",
     component: BodyInformation,
+  },
+  {
+    path: "/newbodyinfo",
+    name: "Body Information / New Info",
+    component: NewInformation,
   },
 ];
 

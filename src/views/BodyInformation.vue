@@ -1,9 +1,25 @@
 <template>
-  <h1>Body Information</h1>
+  <div>
+    <v-row>
+      <v-col>
+        <v-btn class="float-right" dark fab to="/newbodyinfo"
+          ><v-icon>mdi-plus</v-icon></v-btn
+        >
+      </v-col>
+    </v-row>
+    <information-card />
+  </div>
 </template>
 
 <script>
-export default {};
+import InformationCard from "@/components/Pages/BodyInformation/InformationCard.vue";
+export default {
+  components: { InformationCard },
+  data() {
+    return {};
+  },
+  methods: {},
+};
 </script>
 
 <style></style>
