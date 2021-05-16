@@ -17,6 +17,7 @@
 <script>
 import AppBar from "@/components/Shared/AppBar.vue";
 import Drawer from "@/components/Shared/Drawer.vue";
+import { mapState } from "vuex";
 export default {
   name: "App",
   components: {
@@ -24,5 +25,14 @@ export default {
     Drawer,
   },
   data: () => ({}),
+  watch: {
+    personelData: {
+      handler() {
+        localStorage.setItem("personelData", JSON.stringify(this.personelData));
+      },
+      deep: true,
+    },
+  },
+  computed: mapState(["personelData"]),
 };
 </script>
