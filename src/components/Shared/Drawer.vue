@@ -3,7 +3,7 @@
     dark
     app
     v-model="drawer"
-    :mini-variant.sync="this.$store.state.mini"
+    :mini-variant.sync="mini"
     permanent
   >
     <v-list-item class="px-2">
@@ -48,6 +48,16 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    mini: {
+      get() {
+        return this.$store.getters.mini;
+      },
+      set() {
+        this.$store.commit("changeDrawer");
+      },
+    },
   },
 };
 </script>
