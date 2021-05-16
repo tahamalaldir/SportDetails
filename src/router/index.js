@@ -4,6 +4,7 @@ import Home from "@/views/Home.vue";
 import TrainingDetails from "@/views/TrainingDetails.vue";
 import BodyInformation from "@/views/BodyInformation.vue";
 import NewInformation from "@/components/Pages/BodyInformation/NewInformation.vue";
+import InformationCard from "@/components/Pages/BodyInformation/InformationCard.vue";
 
 Vue.use(VueRouter);
 
@@ -20,13 +21,24 @@ const routes = [
   },
   {
     path: "/body",
-    name: "Body Information",
     component: BodyInformation,
-  },
-  {
-    path: "/newbodyinfo",
-    name: "Body Information / New Info",
-    component: NewInformation,
+    children: [
+      {
+        path: "",
+        name: "Body Information",
+        component: InformationCard,
+      },
+      {
+        path: "/body/newbodyinfo",
+        name: "Body Information / New Information",
+        component: NewInformation,
+      },
+      {
+        path: "/body/editbodyinfo/:bodyId",
+        name: "Body Information / Edit Information",
+        component: NewInformation,
+      },
+    ],
   },
 ];
 

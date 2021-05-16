@@ -1,8 +1,8 @@
 <template>
   <v-row>
-    <v-col class="col-sm-7 mx-auto"
+    <v-col class="col-sm-6 mx-auto"
       ><v-form ref="form" v-model="valid">
-        <v-card outlined dark>
+        <v-card color="grey darken-3" outlined dark>
           <v-card-text>
             <v-container>
               <v-row>
@@ -36,7 +36,7 @@
                     required
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6">
+                <v-col cols="12" sm="6" md="4">
                   <v-text-field
                     :rules="[rules.required]"
                     color="dark"
@@ -46,7 +46,7 @@
                     required
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6">
+                <v-col cols="12" sm="6" md="4">
                   <v-text-field
                     :rules="[rules.required]"
                     color="dark"
@@ -56,7 +56,7 @@
                     required
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6">
+                <v-col cols="12" sm="6" md="4">
                   <v-text-field
                     :rules="[rules.required]"
                     color="dark"
@@ -74,17 +74,25 @@
                     type="number"
                     label="Boy"
                     required
+                  ></v-text-field> </v-col
+                ><v-col cols="12" sm="6">
+                  <v-text-field
+                    :rules="[rules.required]"
+                    color="dark"
+                    v-model="info.neck"
+                    type="number"
+                    label="Neck"
+                    required
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-date-picker
                     v-model="info.picker"
-                    value=""
                     full-width
                     year-icon="mdi-calendar-blank"
                     prev-icon="mdi-skip-previous"
                     next-icon="mdi-skip-next"
-                    dark
+                    color="grey darken-1"
                   ></v-date-picker>
                 </v-col>
               </v-row>
@@ -101,12 +109,12 @@
   </v-row>
 </template>
 <script>
-//import { mapMutations } from "vuex";
-
+import { uuid } from "vue-uuid";
 export default {
   data: () => ({
     valid: false,
     info: {
+      id: uuid.v4(),
       chess: "",
       waist: "",
       biceps: "",
@@ -121,6 +129,18 @@ export default {
       required: (value) => !!value || "Required.",
     },
   }),
+  created() {
+    if (this.getInfo) {
+      this.info = this.getInfo;
+    }
+  },
+  computed: {
+    getInfo: {
+      get() {
+        return this.$route.params.info;
+      },
+    },
+  },
   methods: {
     saveBodyInfo() {
       if (this.valid === true) {
