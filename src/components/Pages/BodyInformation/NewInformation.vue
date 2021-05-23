@@ -100,7 +100,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="dark" text to="/body"> Close </v-btn>
+            <v-btn color="dark" text @click="exit()"> Close </v-btn>
             <v-btn color="dark" text @click="saveBodyInfo()"> Save </v-btn>
           </v-card-actions>
         </v-card></v-form
@@ -149,6 +149,9 @@ export default {
       } else if (this.valid === false) {
         this.$refs.form.validate();
       }
+    },
+    exit() {
+      this.$router.push("/body");
     },
   },
 };
