@@ -16,7 +16,7 @@
 
     <v-divider></v-divider>
 
-    <v-list dense>
+    <v-list shaped>
       <v-list-item v-for="item in items" :key="item.title" :to="item.link" link>
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
@@ -26,6 +26,24 @@
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+      <v-list-group color="dark" link prepend-icon="mdi-weight-lifter">
+        <template v-slot:activator>
+          <v-list-item-title>Training</v-list-item-title> </template
+        ><v-list-item
+          v-for="item in subGroups"
+          :key="item.title"
+          :to="item.link"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -36,23 +54,18 @@ export default {
       drawer: true,
       items: [
         { title: "Dashboard", icon: "mdi-view-dashboard", link: "/" },
-        {
-          title: "Training Details",
-          icon: "mdi-weight-lifter",
-          link: "/training",
-        },
-        {
-          title: "Body Information",
-          icon: "mdi-arm-flex",
-          link: "/body",
-        },
+        { title: "Body Information", icon: "mdi-arm-flex", link: "/body" },
+      ],
+      subGroups: [
+        { title: "Programs", link: "/trainingprograms" },
+        { title: "Details", link: "/trainingdetails" },
       ],
     };
   },
   computed: {
     mini: {
       get() {
-        return this.$store.getters.mini;
+        return this.$store.getters.getMini;
       },
       set() {
         this.$store.commit("changeDrawer");
