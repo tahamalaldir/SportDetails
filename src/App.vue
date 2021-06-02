@@ -32,7 +32,13 @@ export default {
       },
       deep: true,
     },
+    trainig: {
+      handler() {
+        localStorage.setItem("trainig", JSON.stringify(this.trainig));
+      },
+      deep: true,
+    },
   },
-  computed: mapState(["personelData"]),
+  computed: mapState(["personelData", "trainig"]),
 };
 </script>
