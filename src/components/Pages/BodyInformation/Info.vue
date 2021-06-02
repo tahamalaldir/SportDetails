@@ -1,5 +1,5 @@
 <template>
-  <v-row
+  <v-row class="mt-2"
     ><new-information-button />
     <v-col v-if="!this.$store.state.personelData.bodyInformation.length"
       ><p class="text-center" width="100%">Body information not found</p></v-col
