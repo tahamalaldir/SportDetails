@@ -1,5 +1,5 @@
 <template>
-  <h1>Training Details</h1>
+  <router-view></router-view>
 </template>
 
 <script>
