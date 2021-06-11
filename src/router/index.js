@@ -1,10 +1,18 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+// Home Pages
 import Home from "@/views/Home.vue";
-import TrainingDetails from "@/views/TrainingDetails.vue";
+// BodyInformation Pages
 import BodyInformation from "@/views/BodyInformation.vue";
 import NewInformation from "@/components/Pages/BodyInformation/NewInformation.vue";
-import InformationCard from "@/components/Pages/BodyInformation/InformationCard.vue";
+import Information from "@/components/Pages/BodyInformation/Info.vue";
+// TrainingDetails Pages
+import TrainingDetails from "@/views/TrainingDetails.vue";
+import Details from "@/components/Pages/TrainingDetails/Details.vue";
+// TrainingPrograms Pages
+import TrainingPrograms from "@/views/TrainingPrograms.vue";
+import Programs from "@/components/Pages/TrainingPrograms/Programs.vue";
+import NewProgram from "@/components/Pages/TrainingPrograms/NewProgram.vue";
 
 Vue.use(VueRouter);
 
@@ -15,9 +23,31 @@ const routes = [
     component: Home,
   },
   {
-    path: "/training",
-    name: "Training Details",
+    path: "/trainingdetails",
     component: TrainingDetails,
+    children: [
+      {
+        path: "",
+        name: "Training Details",
+        component: Details,
+      },
+    ],
+  },
+  {
+    path: "/trainingprograms",
+    component: TrainingPrograms,
+    children: [
+      {
+        path: "",
+        name: "Training Programs",
+        component: Programs,
+      },
+      {
+        path: "newtrainingprogram",
+        name: "Training Programs / New Program",
+        component: NewProgram,
+      },
+    ],
   },
   {
     path: "/body",
@@ -26,7 +56,7 @@ const routes = [
       {
         path: "",
         name: "Body Information",
-        component: InformationCard,
+        component: Information,
       },
       {
         path: "/body/newbodyinfo",
