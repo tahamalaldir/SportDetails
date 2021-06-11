@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
+//import { uuid } from "vue-uuid";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -12,6 +12,10 @@ export default new Vuex.Store({
       userLastname: "Malaldır",
       userSex: "Erkek",
       bodyInformation: [],
+    },
+    trainig: {
+      trainingDetails: [],
+      trainigPrograms: [],
     },
   },
   mutations: {
@@ -38,9 +42,44 @@ export default new Vuex.Store({
         state.personelData.bodyInformation.splice(index, 1);
       }
     },
+    saveTrainigPrograms(state, payload) {
+      let index = state.trainig.trainigPrograms.findIndex(
+        (c) => c.id == payload.id
+      );
+      if (index < 0) {
+        state.trainig.trainigPrograms.push(payload);
+      }
+    },
+    deleteTrainigPrograms(state, payload) {
+      let index = state.trainig.trainigPrograms.findIndex(
+        (c) => c.id == payload.id
+      );
+      if (index > -1) {
+        state.trainig.trainigPrograms.splice(index, 1);
+      }
+    },
+    saveTrainigDetails(state, payload) {
+      let index = state.trainig.trainingDetails.findIndex(
+        (c) => c.id == payload.id
+      );
+      if (index < 0) {
+        state.trainig.trainingDetails.push(payload);
+      }
+    },
+    deleteTrainigDetails(state, payload) {
+      let index = state.trainig.trainingDetails.findIndex(
+        (c) => c.id == payload.id
+      );
+      if (index > -1) {
+        state.trainig.trainingDetails.splice(index, 1);
+      }
+    },
     initialiseStore(state) {
       if (localStorage.getItem("personelData")) {
         state.personelData = JSON.parse(localStorage.getItem("personelData"));
+      }
+      if (localStorage.getItem("trainig")) {
+        state.trainig = JSON.parse(localStorage.getItem("trainig"));
       }
     },
   },
@@ -51,10 +90,31 @@ export default new Vuex.Store({
     deleteBodyInfo({ commit }, payload) {
       commit("deleteBodyInfo", payload);
     },
+    saveTrainigPrograms({ commit }, payload) {
+      commit("saveTrainigPrograms", payload);
+    },
+    deleteTrainigPrograms({ commit }, payload) {
+      commit("deleteTrainigPrograms", payload);
+    },
+    deleteTrainigDetails({ commit }, payload) {
+      commit("deleteTrainigDetails", payload);
+    },
+    saveTrainigDetails({ commit }, payload) {
+      commit("saveTrainigDetails", payload);
+    },
   },
   getters: {
-    mini: (state) => {
+    getMini: (state) => {
       return state.mini;
+    },
+    getBodyInformation: (state) => {
+      return state.personelData.bodyInformation;
+    },
+    getPrograms: (state) => {
+      return state.trainig.trainigPrograms;
+    },
+    getDetails: (state) => {
+      return state.trainig.trainingDetails;
     },
   },
 });
