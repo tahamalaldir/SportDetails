@@ -4,7 +4,7 @@
       <v-card-subtitle class="text-md-body-1 py-1 px-0">
         <v-row>
           <v-col
-            ><v-icon left>fas fa-dumbbell</v-icon>{{ info.picker }} tarihli
+            ><v-icon left>mdi-dumbbell</v-icon>{{ info.picker }} tarihli
             ölçüleriniz.</v-col
           > </v-row
         ><v-divider></v-divider>
@@ -36,11 +36,14 @@
       <v-card-text class="text-lg-h5 py-1 px-0">
         <v-row>
           <v-col cols="12"
-            ><v-icon left>mdi-fire</v-icon>Yağ Oranı: .......</v-col
+            ><v-icon>mdi-fire</v-icon>Yağ Oranı: {{ info.fatRate }}%</v-col
           > </v-row
         ><v-divider></v-divider>
       </v-card-text>
-      <v-card-actions class="float-right">
+      <v-card-subtitle class="py-0 px-0">
+        This account can have a maximum margin of error of 3%.
+      </v-card-subtitle>
+      <v-card-actions class="float-right pt-0">
         <v-row>
           <v-col cols="12"
             ><v-btn text color="error" @click="deleteInfo(info)"

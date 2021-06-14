@@ -12,7 +12,7 @@
                     color="dark"
                     v-model="info.chess"
                     type="number"
-                    label="Göğüs"
+                    label="Chess"
                     required
                   ></v-text-field>
                 </v-col>
@@ -22,7 +22,7 @@
                     color="dark"
                     v-model="info.waist"
                     type="number"
-                    label="Bel"
+                    label="Waist"
                     required
                   ></v-text-field>
                 </v-col>
@@ -32,7 +32,7 @@
                     color="dark"
                     v-model="info.biceps"
                     type="number"
-                    label="Kol"
+                    label="Biceps"
                     required
                   ></v-text-field>
                 </v-col>
@@ -42,7 +42,7 @@
                     color="dark"
                     v-model="info.leg"
                     type="number"
-                    label="Bacak"
+                    label="Leg"
                     required
                   ></v-text-field>
                 </v-col>
@@ -52,7 +52,7 @@
                     color="dark"
                     v-model="info.hip"
                     type="number"
-                    label="Kalça"
+                    label="Hip"
                     required
                   ></v-text-field>
                 </v-col>
@@ -60,9 +60,9 @@
                   <v-text-field
                     :rules="[rules.required]"
                     color="dark"
-                    v-model="info.kilo"
+                    v-model="info.weight"
                     type="number"
-                    label="Kilo"
+                    label="Weight"
                     required
                   ></v-text-field>
                 </v-col>
@@ -72,7 +72,7 @@
                     color="dark"
                     v-model="info.height"
                     type="number"
-                    label="Boy"
+                    label="Height"
                     required
                   ></v-text-field> </v-col
                 ><v-col cols="12" sm="6">
@@ -120,9 +120,10 @@ export default {
       biceps: "",
       leg: "",
       hip: "",
-      kilo: "",
+      weight: "",
       height: "",
       neck: "",
+      fatRate: "",
       picker: new Date().toISOString().substr(0, 10),
     },
     rules: {
@@ -144,6 +145,14 @@ export default {
   methods: {
     saveBodyInfo() {
       if (this.valid === true) {
+        let fatRate;
+        fatRate =
+          495 /
+            (1.0324 -
+              0.19077 * Math.log10(this.info.waist - this.info.neck) +
+              0.15456 * Math.log10(this.info.height)) -
+          450;
+        this.info.fatRate = fatRate.toFixed(1);
         this.$store.dispatch("saveBodyInfo", this.info);
         this.$router.push("/body");
       } else if (this.valid === false) {
