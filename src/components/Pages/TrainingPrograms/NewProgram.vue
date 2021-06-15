@@ -17,7 +17,7 @@
                   ><v-text-field
                     :rules="[rules.required]"
                     color="dark"
-                    v-model="program.programAdı"
+                    v-model="program.programName"
                     label="Program Name"
                     required
                   ></v-text-field></v-col
@@ -27,9 +27,9 @@
                   ><v-select
                     :items="items.text"
                     :rules="[rules.required]"
-                    label="Hareket"
+                    label="Movement Name"
                     color="dark"
-                    v-model="program.hareketAdı[training - 1]"
+                    v-model="program.movementName[training - 1]"
                     required
                   ></v-select>
                 </v-col>
@@ -47,9 +47,9 @@
                   <v-select
                     :items="items.number"
                     :rules="[rules.required]"
-                    label="Tekrar"
+                    label="Repeat"
                     color="dark"
-                    v-model="program.tekrar[training - 1]"
+                    v-model="program.repeat[training - 1]"
                     required
                   ></v-select>
                 </v-col>
@@ -73,10 +73,10 @@ export default {
     dates: [],
     program: {
       id: uuid.v4(),
-      programAdı: "",
-      hareketAdı: {},
+      programName: "",
+      movementName: {},
       set: {},
-      tekrar: {},
+      repeat: {},
     },
     trainingNumber: 1,
     items: {
@@ -124,17 +124,17 @@ export default {
       if (this.valid === true) {
         let deneme = {
           id: "",
-          programAdı: "",
-          hareketler: [],
+          programName: "",
+          movements: [],
         };
         deneme.id = this.program.id;
-        deneme.programAdı = this.program.programAdı;
+        deneme.programName = this.program.programName;
         for (let x = 0; x < this.trainingNumber; x++) {
-          deneme.hareketler.push({
-            hareketAdı: this.program.hareketAdı[x],
+          deneme.movements.push({
+            movementName: this.program.movementName[x],
             set: this.program.set[x],
-            tekrar: this.program.tekrar[x],
-            kilo: "0",
+            repeat: this.program.repeat[x],
+            weight: "0",
           });
         }
 

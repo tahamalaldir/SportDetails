@@ -3,7 +3,10 @@
     <v-container>
       <v-card-subtitle class="text-md-body-1 py-1">
         <v-row>
-          <v-col>{{ program.programAdı }} isimli programınız.</v-col>
+          <v-col
+            ><v-icon>mdi-bookmark</v-icon>{{ program.programName }} training
+            program</v-col
+          >
           <v-col class="pa-0" cols="auto"
             ><v-btn icon @click="editProgram(program)"
               ><v-icon> mdi-pencil </v-icon></v-btn
@@ -12,32 +15,32 @@
         ><v-divider></v-divider>
       </v-card-subtitle>
       <v-card-text
-        v-for="(hareket, i) in program.hareketler"
+        v-for="(movement, i) in program.movements"
         :key="i"
         class="text-lg-h6 py-1"
       >
         <v-row>
           <v-col class="pb-0" cols="12"
-            >Hareket:<span class="font-weight-regular">
-              {{ hareket.hareketAdı }}</span
+            >Movement:<span class="font-weight-regular">
+              {{ movement.movementName }}</span
             >
           </v-col>
         </v-row>
         <v-row>
           <v-col class="py-0" cols="6"
             >Set:
-            <span class="font-weight-regular">{{ hareket.set }}</span></v-col
+            <span class="font-weight-regular">{{ movement.set }}</span></v-col
           >
           <v-col class="py-0" cols="6"
-            >Tekrar:<span class="font-weight-regular">
-              {{ hareket.tekrar }}
+            >Repeat:<span class="font-weight-regular">
+              {{ movement.repeat }}
             </span></v-col
           > </v-row
         ><v-row>
-          <v-col class="py-0" cols="auto"><span>Kilo: </span> </v-col>
+          <v-col class="py-0" cols="auto"><span>Weight: </span> </v-col>
           <v-col class="py-0">
             <v-slider
-              v-model="kilo[i]"
+              v-model="weight[i]"
               color="orange darken-3"
               track-color="dark"
               thumb-label
@@ -50,7 +53,7 @@
         <v-row>
           <v-col>
             <v-menu
-              v-model="menu2"
+              v-model="menu"
               :close-on-content-click="false"
               :nudge-right="40"
               transition="scale-transition"
@@ -71,7 +74,7 @@
               </template>
               <v-date-picker
                 v-model="date"
-                @input="menu2 = false"
+                @input="menu = false"
               ></v-date-picker>
             </v-menu>
           </v-col> </v-row
@@ -100,8 +103,8 @@ export default {
   props: ["program"],
   data: () => ({
     date: new Date().toISOString().substr(0, 10),
-    menu2: false,
-    kilo: [],
+    menu: false,
+    weight: [],
   }),
   methods: {
     deleteProgram(program) {
@@ -114,16 +117,16 @@ export default {
     saveProgram(program) {
       let fakeProgram = {
         id: uuid.v4(),
-        programAdı: program.programAdı,
-        hareketler: program.hareketler,
+        programName: program.programName,
+        movements: program.movements,
+        date: this.date,
       };
-      for (let x = 0; x < program.hareketler.length; x++) {
-        fakeProgram.hareketler[x].kilo = this.kilo[x];
+      for (let x = 0; x < program.movements.length; x++) {
+        fakeProgram.movements[x].weight = this.weight[x];
       }
       this.$store.dispatch("saveTrainigDetails", fakeProgram);
-      this.kilo = [];
+      this.weight = [];
       this.$router.push("/trainingdetails");
-      console.log(fakeProgram);
     },
   },
 };

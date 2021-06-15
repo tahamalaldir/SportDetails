@@ -10,9 +10,9 @@
                   <v-text-field
                     :rules="[rules.required]"
                     color="dark"
-                    v-model="info.chess"
+                    v-model="info.chest"
                     type="number"
-                    label="Chess"
+                    label="Chest"
                     required
                   ></v-text-field>
                 </v-col>
@@ -115,7 +115,7 @@ export default {
     valid: false,
     info: {
       id: uuid.v4(),
-      chess: "",
+      chest: "",
       waist: "",
       biceps: "",
       leg: "",
