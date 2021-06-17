@@ -8,7 +8,6 @@ import NewInformation from "@/components/Pages/BodyInformation/NewInformation.vu
 import Information from "@/components/Pages/BodyInformation/Info.vue";
 // TrainingDetails Pages
 import TrainingDetails from "@/views/TrainingDetails.vue";
-import Details from "@/components/Pages/TrainingDetails/Details.vue";
 // TrainingPrograms Pages
 import TrainingPrograms from "@/views/TrainingPrograms.vue";
 import Programs from "@/components/Pages/TrainingPrograms/Programs.vue";
@@ -24,14 +23,8 @@ const routes = [
   },
   {
     path: "/trainingdetails",
+    name: "Training Details",
     component: TrainingDetails,
-    children: [
-      {
-        path: "",
-        name: "Training Details",
-        component: Details,
-      },
-    ],
   },
   {
     path: "/trainingprograms",
@@ -45,6 +38,11 @@ const routes = [
       {
         path: "newtrainingprogram",
         name: "Training Programs / New Program",
+        component: NewProgram,
+      },
+      {
+        path: "editprogram",
+        name: "Training Programs / Edit Program",
         component: NewProgram,
       },
     ],
