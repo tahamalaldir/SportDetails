@@ -1,9 +1,14 @@
 <template>
-  <h1>Dashboard</h1>
+  <v-row>
+    <calender />
+  </v-row>
 </template>
 
 <script>
-export default {};
+import Calender from "@/components/Pages/Home/Calender.vue";
+export default {
+  components: { Calender },
+};
 </script>
 
 <style></style>

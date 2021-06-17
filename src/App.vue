@@ -38,7 +38,13 @@ export default {
       },
       deep: true,
     },
+    events: {
+      handler() {
+        localStorage.setItem("events", JSON.stringify(this.events));
+      },
+      deep: true,
+    },
   },
-  computed: mapState(["personelData", "trainig"]),
+  computed: mapState(["personelData", "trainig", "events"]),
 };
 </script>

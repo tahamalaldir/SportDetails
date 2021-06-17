@@ -17,6 +17,7 @@ export default new Vuex.Store({
       trainingDetails: [],
       trainigPrograms: [],
     },
+    events: [],
   },
   mutations: {
     changeDrawer(state) {
@@ -32,6 +33,12 @@ export default new Vuex.Store({
       );
       if (index < 0) {
         state.personelData.bodyInformation.push(payload);
+        state.events.push({
+          id: payload.id,
+          name: "Ölçüm yapıldı.",
+          start: payload.picker,
+          color: "blue",
+        });
       }
     },
     deleteBodyInfo(state, payload) {
@@ -40,6 +47,8 @@ export default new Vuex.Store({
       );
       if (index > -1) {
         state.personelData.bodyInformation.splice(index, 1);
+        let eventIndex = state.events.findIndex((c) => c.id == payload.id);
+        state.events.splice(eventIndex, 1);
       }
     },
     saveTrainigPrograms(state, payload) {
@@ -64,6 +73,12 @@ export default new Vuex.Store({
       );
       if (index < 0) {
         state.trainig.trainingDetails.push(payload);
+        state.events.push({
+          id: payload.id,
+          name: "Training yapıldı.",
+          start: payload.date,
+          color: "green",
+        });
       }
     },
     deleteTrainigDetails(state, payload) {
@@ -72,6 +87,8 @@ export default new Vuex.Store({
       );
       if (index > -1) {
         state.trainig.trainingDetails.splice(index, 1);
+        let eventIndex = state.events.findIndex((c) => c.id == payload.id);
+        state.events.splice(eventIndex, 1);
       }
     },
     initialiseStore(state) {
@@ -80,6 +97,9 @@ export default new Vuex.Store({
       }
       if (localStorage.getItem("trainig")) {
         state.trainig = JSON.parse(localStorage.getItem("trainig"));
+      }
+      if (localStorage.getItem("events")) {
+        state.events = JSON.parse(localStorage.getItem("events"));
       }
     },
   },
