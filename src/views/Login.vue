@@ -1,0 +1,71 @@
+<template>
+  <v-container
+    ><v-row class="justify-center">
+      <v-col md="5">
+        <v-card elevation="2" color="grey darken-3" dark outlined class="pa-4">
+          <v-form ref="form" v-model="valid">
+            <v-text-field
+              prepend-icon="mdi-email"
+              color="dark"
+              :rules="emailRules"
+              v-model="personelData.email"
+              label="E-mail"
+              required
+            ></v-text-field>
+            <v-text-field
+              prepend-icon="mdi-lock"
+              color="dark"
+              v-model="personelData.password"
+              :type="show1 ? 'text' : 'password'"
+              name="input-10-1"
+              label="Password"
+              required
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="[rules.required, rules.min]"
+              hint="At least 8 characters"
+              @click:append="show1 = !show1"
+            ></v-text-field>
+            <v-btn
+              color="grey darken-1"
+              :disabled="!valid"
+              @click="login()"
+              class="white--text"
+              elevation="3"
+            >
+              Login
+            </v-btn>
+          </v-form></v-card
+        >
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+export default {
+  name: "login",
+  data() {
+    return {
+      personelData: {
+        email: "",
+        password: "",
+      },
+      valid: true,
+      show1: "",
+      rules: {
+        required: (value) => !!value || "Password is required.",
+        min: (v) => v.length >= 8 || "Min 8 characters",
+      },
+      emailRules: [
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+/.test(v) || "E-mail must be valid",
+      ],
+    };
+  },
+  methods: {
+    login() {
+      this.$store.dispatch("login", { ...this.personelData, isUser: true });
+    },
+  },
+};
+</script>

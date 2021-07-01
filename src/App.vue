@@ -25,6 +25,9 @@ export default {
     Drawer,
   },
   data: () => ({}),
+  created() {
+    this.$store.dispatch("initAuth");
+  },
   watch: {
     personelData: {
       handler() {

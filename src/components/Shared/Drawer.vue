@@ -16,7 +16,7 @@
 
     <v-divider></v-divider>
 
-    <v-list shaped>
+    <v-list shaped v-if="this.$store.getters.isAuthenticated">
       <v-list-item v-for="item in items" :key="item.title" :to="item.link" link>
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
@@ -45,6 +45,17 @@
         </v-list-item>
       </v-list-group>
     </v-list>
+    <v-list shaped v-else>
+      <v-list-item v-for="item in auth" :key="item.title" :to="item.link" link>
+        <v-list-item-icon>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
   </v-navigation-drawer>
 </template>
 <script>
@@ -59,6 +70,10 @@ export default {
       subGroups: [
         { title: "Programs", link: "/trainingprograms" },
         { title: "Details", link: "/trainingdetails" },
+      ],
+      auth: [
+        { title: "Login", icon: "mdi-account", link: "/login" },
+        { title: "Register", icon: "mdi-account", link: "/register" },
       ],
     };
   },
