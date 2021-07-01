@@ -138,7 +138,7 @@ export default {
           });
         }
 
-        this.$store.dispatch("saveTrainigPrograms", deneme);
+        this.$store.dispatch("saveTrainingPrograms", deneme);
         this.exit();
       } else if (this.valid === false) {
         this.$refs.form.validate();

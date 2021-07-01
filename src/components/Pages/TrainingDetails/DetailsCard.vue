@@ -58,7 +58,7 @@ export default {
   props: ["detail"],
   methods: {
     deleteDetails(detail) {
-      this.$store.dispatch("deleteTrainigDetails", detail);
+      this.$store.dispatch("deleteTrainingDetails", detail);
     },
   },
 };

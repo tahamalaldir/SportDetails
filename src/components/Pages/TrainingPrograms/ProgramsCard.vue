@@ -108,7 +108,7 @@ export default {
   }),
   methods: {
     deleteProgram(program) {
-      this.$store.dispatch("deleteTrainigPrograms", program);
+      this.$store.dispatch("deleteTrainingPrograms", program);
     },
     editProgram(program) {
       //this.$store.dispatch("deleteTrainigPrograms", program);
@@ -124,7 +124,7 @@ export default {
       for (let x = 0; x < program.movements.length; x++) {
         fakeProgram.movements[x].weight = this.weight[x];
       }
-      this.$store.dispatch("saveTrainigDetails", fakeProgram);
+      this.$store.dispatch("saveTrainingDetails", fakeProgram);
       this.weight = [];
       this.$router.push("/trainingdetails");
     },

@@ -1,13 +1,13 @@
 <template>
   <v-row class="mt-2">
     <new-programs-button />
-    <v-col v-if="!trainigPrograms.length"
+    <v-col v-if="!trainingPrograms.length"
       ><p class="text-center" width="100%">
         Training Programs not found
       </p></v-col
     >
     <v-col
-      v-for="(program, i) in trainigPrograms"
+      v-for="(program, i) in trainingPrograms"
       :key="i"
       v-else
       sm="5"
@@ -25,7 +25,7 @@ import ProgramsCard from "./ProgramsCard.vue";
 export default {
   components: { NewProgramsButton, ProgramsCard },
   computed: {
-    trainigPrograms: {
+    trainingPrograms: {
       get() {
         return this.$store.getters.getPrograms;
       },
