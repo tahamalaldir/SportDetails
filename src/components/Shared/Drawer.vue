@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    color="grey darken-4"
     dark
     app
     v-model="drawer"

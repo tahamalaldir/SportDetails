@@ -2,7 +2,7 @@
   <v-container
     ><v-row class="justify-center">
       <v-col md="7">
-        <v-card elevation="4" color="grey darken-3" dark outlined class="pa-4">
+        <v-card elevation="24" color="grey darken-4" dark outlined class="pa-4">
           <v-form ref="form" v-model="valid">
             <v-text-field
               prepend-icon="mdi-account"
@@ -51,10 +51,10 @@
               <v-radio color="dark" label="Female" value="female"></v-radio>
             </v-radio-group>
             <v-btn
-              color="grey darken-1"
+              color="grey lighten-2"
               :disabled="!valid"
               @click="register()"
-              class="white--text"
+              class="black--text"
               elevation="3"
             >
               Submit

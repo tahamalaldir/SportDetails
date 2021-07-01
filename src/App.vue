@@ -4,7 +4,7 @@
 
     <app-bar />
 
-    <v-main>
+    <v-main class="grey lighten-2">
       <v-container fluid>
         <router-view></router-view>
       </v-container>
