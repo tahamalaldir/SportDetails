@@ -1,6 +1,7 @@
 <template v-slot:extension>
   <v-fab-transition>
     <v-btn
+      class="mt-2"
       color="grey darken-3"
       fab
       dark
