@@ -1,6 +1,6 @@
 <template>
   <v-col cols="12">
-    <v-sheet height="64">
+    <v-sheet dark height="64">
       <v-toolbar flat>
         <v-btn outlined class="mr-4" @click="setToday"> Today </v-btn>
         <v-btn fab text small @click="$refs.calendar.prev()">
@@ -14,7 +14,7 @@
         </v-toolbar-title>
       </v-toolbar>
     </v-sheet>
-    <v-sheet height="600px" class="mt-1">
+    <v-sheet dark height="600px">
       <v-calendar
         ref="calendar"
         v-model="value"

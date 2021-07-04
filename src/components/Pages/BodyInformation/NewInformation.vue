@@ -2,7 +2,7 @@
   <v-row>
     <v-col class="col-sm-6 mx-auto"
       ><v-form ref="form" v-model="valid">
-        <v-card color="grey darken-3" outlined dark>
+        <v-card color="grey darken-4" elevation="24" outlined dark>
           <v-card-text>
             <v-container>
               <v-row>
@@ -92,7 +92,7 @@
                     year-icon="mdi-calendar-blank"
                     prev-icon="mdi-skip-previous"
                     next-icon="mdi-skip-next"
-                    color="grey darken-1"
+                    color="grey darken-3"
                   ></v-date-picker>
                 </v-col>
               </v-row>
@@ -100,8 +100,10 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="dark" text @click="exit()"> Close </v-btn>
-            <v-btn color="dark" text @click="saveBodyInfo()"> Save </v-btn>
+            <v-btn color="dark" text outlined @click="exit()"> Close </v-btn>
+            <v-btn color="dark" text outlined @click="saveBodyInfo()">
+              Save
+            </v-btn>
           </v-card-actions>
         </v-card></v-form
       ></v-col

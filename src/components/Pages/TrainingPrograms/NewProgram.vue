@@ -1,10 +1,14 @@
 <template>
   <v-row>
     <v-col class="col-sm-6 mx-auto">
-      <v-card color="grey darken-3" dark>
+      <v-card color="grey darken-4" dark>
         <v-card-title>
           <v-col>
-            <v-btn class="float-right" @click="trainingNumber += 1"
+            <v-btn
+              class="float-right"
+              text
+              outlined
+              @click="trainingNumber += 1"
               ><v-icon left>mdi-plus</v-icon>New Movement</v-btn
             >
           </v-col>
@@ -51,7 +55,9 @@
                     color="dark"
                     v-model="program.repeat[training - 1]"
                     required
-                  ></v-select>
+                  ></v-select> </v-col
+                ><v-col>
+                  <v-divider></v-divider>
                 </v-col>
               </v-row>
             </v-form>
@@ -59,8 +65,10 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="dark" text @click="exit()"> Close </v-btn>
-          <v-btn color="dark" text @click="programSave()"> Save </v-btn>
+          <v-btn color="dark" text outlined @click="exit()"> Close </v-btn>
+          <v-btn color="dark" text outlined @click="programSave()">
+            Save
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
