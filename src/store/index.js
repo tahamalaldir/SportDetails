@@ -176,6 +176,10 @@ export default new Vuex.Store({
             userName: payload.name,
             userLastname: payload.lastname,
             userSex: payload.sex,
+            bodyInformation: [],
+            trainingDetails: [],
+            trainingPrograms: [],
+            events: [],
           };
           db.collection("users")
             .doc(response.data.localId)
