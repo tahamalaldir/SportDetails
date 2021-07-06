@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     register() {
-      this.$store.dispatch("login", { ...this.personelData, isUser: false });
+      this.$store.dispatch("register", { ...this.personelData });
     },
   },
 };

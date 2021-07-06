@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 import router from "../router";
 //import { uuid } from "vue-uuid";
+import db from "@/firebase.js";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -105,16 +106,8 @@ export default new Vuex.Store({
     clearToken(state) {
       state.token = "";
     },
-    initialiseStore(state) {
-      if (localStorage.getItem("personelData")) {
-        state.personelData = JSON.parse(localStorage.getItem("personelData"));
-      }
-      if (localStorage.getItem("Training")) {
-        state.Training = JSON.parse(localStorage.getItem("Training"));
-      }
-      if (localStorage.getItem("events")) {
-        state.events = JSON.parse(localStorage.getItem("events"));
-      }
+    setState(state, data) {
+      state.personelData = data;
     },
   },
   actions: {
@@ -122,6 +115,7 @@ export default new Vuex.Store({
       let token = localStorage.getItem("token");
       if (token) {
         let expirationDate = localStorage.getItem("expirationDate");
+        let id = localStorage.getItem("id");
         let time = new Date().getTime();
 
         if (time >= +expirationDate) {
@@ -130,6 +124,7 @@ export default new Vuex.Store({
           commit("setToken", token);
           let timerSecond = +expirationDate - time;
           dispatch("setTimeoutTimer", timerSecond);
+          dispatch("getAllData", id);
           router.push("/");
         }
       } else {
@@ -138,33 +133,70 @@ export default new Vuex.Store({
       }
     },
     login({ commit, dispatch }, payload) {
-      let authLink =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
-
-      if (payload.isUser) {
-        authLink =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
-      }
       return axios
-        .post(authLink + "AIzaSyAmHs2HbOg-cDcj4vXSVYXuqd3G4iiI70s", {
-          email: payload.email,
-          password: payload.password,
-          returnSecureToken: true,
-        })
+        .post(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAmHs2HbOg-cDcj4vXSVYXuqd3G4iiI70s",
+          {
+            email: payload.email,
+            password: payload.password,
+            returnSecureToken: true,
+          }
+        )
         .then((response) => {
           commit("setToken", response.data.idToken);
+          dispatch("getAllData", response.data.localId);
           localStorage.setItem("token", response.data.idToken);
           localStorage.setItem(
             "expirationDate",
             new Date().getTime() + +response.data.expiresIn * 10000
           );
+          localStorage.setItem("id", response.data.localId);
           dispatch("setTimeoutTimer", response.data.expiresIn * 10000);
+          router.push("/");
+        });
+    },
+    // eslint-disable-next-line no-unused-vars
+    register({ commit }, payload) {
+      return axios
+        .post(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAmHs2HbOg-cDcj4vXSVYXuqd3G4iiI70s",
+          {
+            email: payload.email,
+            password: payload.password,
+            returnSecureToken: true,
+          }
+        )
+        .then((response) => {
+          let user = {
+            userId: response.data.localId,
+            userName: payload.name,
+            userLastname: payload.lastname,
+            userSex: payload.sex,
+          };
+          db.collection("users")
+            .doc(response.data.localId)
+            .set(user)
+            .then(() => {
+              router.push("/login");
+            });
+        });
+    },
+
+    getAllData({ commit }, localId) {
+      db.collection("users")
+        .where("userId", "==", localId)
+        .get()
+        .then((snapshot) => {
+          snapshot.docs.forEach((doc) => {
+            commit("setState", doc.data());
+          });
         });
     },
     logout({ commit }) {
       commit("clearToken");
       localStorage.removeItem("token");
       localStorage.removeItem("expirationDate");
+      localStorage.removeItem("id");
       router.push("/login");
     },
     setTimeoutTimer({ dispatch }, expiresIn) {
