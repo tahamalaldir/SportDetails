@@ -19,8 +19,8 @@ export default new Vuex.Store({
       bodyInformation: [],
       trainingDetails: [],
       trainingPrograms: [],
+      events: [],
     },
-    events: [],
   },
   mutations: {
     changeDrawer(state) {
@@ -36,7 +36,7 @@ export default new Vuex.Store({
       );
       if (index < 0) {
         state.personelData.bodyInformation.push(payload);
-        state.events.push({
+        state.personelData.events.push({
           id: payload.id,
           name: "Ölçüm yapıldı.",
           start: payload.picker,
@@ -50,8 +50,10 @@ export default new Vuex.Store({
       );
       if (index > -1) {
         state.personelData.bodyInformation.splice(index, 1);
-        let eventIndex = state.events.findIndex((c) => c.id == payload.id);
-        state.events.splice(eventIndex, 1);
+        let eventIndex = state.personelData.events.findIndex(
+          (c) => c.id == payload.id
+        );
+        state.personelData.events.splice(eventIndex, 1);
       }
     },
     saveTrainingPrograms(state, payload) {
@@ -76,7 +78,7 @@ export default new Vuex.Store({
       );
       if (index < 0) {
         state.personelData.trainingDetails.push(payload);
-        state.events.push({
+        state.personelData.events.push({
           id: payload.id,
           name: "Training yapıldı.",
           start: payload.date,
@@ -90,8 +92,10 @@ export default new Vuex.Store({
       );
       if (index > -1) {
         state.personelData.trainingDetails.splice(index, 1);
-        let eventIndex = state.events.findIndex((c) => c.id == payload.id);
-        state.events.splice(eventIndex, 1);
+        let eventIndex = state.personelData.events.findIndex(
+          (c) => c.id == payload.id
+        );
+        state.personelData.events.splice(eventIndex, 1);
       }
     },
     userRegister(state, payload) {
@@ -181,7 +185,6 @@ export default new Vuex.Store({
             });
         });
     },
-
     getAllData({ commit }, localId) {
       db.collection("users")
         .where("userId", "==", localId)
@@ -191,6 +194,10 @@ export default new Vuex.Store({
             commit("setState", doc.data());
           });
         });
+    },
+    updateFirebase({ state }) {
+      let id = localStorage.getItem("id");
+      db.collection("users").doc(id).update(state.personelData);
     },
     logout({ commit }) {
       commit("clearToken");
@@ -204,26 +211,33 @@ export default new Vuex.Store({
         dispatch("logout");
       }, expiresIn);
     },
-    saveBodyInfo({ commit }, payload) {
+    saveBodyInfo({ commit, dispatch }, payload) {
       commit("saveBodyInfo", payload);
+      dispatch("updateFirebase");
     },
-    deleteBodyInfo({ commit }, payload) {
+    deleteBodyInfo({ commit, dispatch }, payload) {
       commit("deleteBodyInfo", payload);
+      dispatch("updateFirebase");
     },
-    saveTrainingPrograms({ commit }, payload) {
+    saveTrainingPrograms({ commit, dispatch }, payload) {
       commit("saveTrainingPrograms", payload);
+      dispatch("updateFirebase");
     },
-    deleteTrainingPrograms({ commit }, payload) {
+    deleteTrainingPrograms({ commit, dispatch }, payload) {
       commit("deleteTrainingPrograms", payload);
+      dispatch("updateFirebase");
     },
-    deleteTrainingDetails({ commit }, payload) {
+    deleteTrainingDetails({ commit, dispatch }, payload) {
       commit("deleteTrainingDetails", payload);
+      dispatch("updateFirebase");
     },
-    saveTrainingDetails({ commit }, payload) {
+    saveTrainingDetails({ commit, dispatch }, payload) {
       commit("saveTrainingDetails", payload);
+      dispatch("updateFirebase");
     },
-    userRegister({ commit }, payload) {
+    userRegister({ commit, dispatch }, payload) {
       commit("userRegister", payload);
+      dispatch("updateFirebase");
     },
   },
   getters: {
@@ -241,9 +255,6 @@ export default new Vuex.Store({
     },
     getDetails: (state) => {
       return state.personelData.trainingDetails;
-    },
-    getLogin: (state) => {
-      return state.isLogin;
     },
   },
 });

@@ -40,7 +40,7 @@ export default {
       this.value = new Date().toISOString().substr(0, 10);
     },
     getEvents() {
-      this.events = this.$store.state.events;
+      this.events = this.$store.state.personelData.events;
     },
     getEventColor(event) {
       return event.color;
