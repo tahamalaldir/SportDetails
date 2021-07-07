@@ -9,6 +9,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     mini: false,
+    snackbar: {
+      show: false,
+      color: "error",
+      text: "Başarıyla eklendi",
+    },
     token: "",
     fbApiKey: "AIzaSyAmHs2HbOg-cDcj4vXSVYXuqd3G4iiI70s",
     personelData: {
@@ -28,6 +33,13 @@ export default new Vuex.Store({
         state.mini = true;
       } else if (state.mini === true) {
         state.mini = false;
+      }
+    },
+    changeSnackbar(state) {
+      if (state.snackbar === false) {
+        state.snackbar = true;
+      } else if (state.snackbar === true) {
+        state.snackbar = false;
       }
     },
     saveBodyInfo(state, payload) {
@@ -250,6 +262,9 @@ export default new Vuex.Store({
     },
     getMini: (state) => {
       return state.mini;
+    },
+    getSnackbar: (state) => {
+      return state.snackbar;
     },
     getBodyInformation: (state) => {
       return state.personelData.bodyInformation;
