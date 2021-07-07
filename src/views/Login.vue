@@ -11,6 +11,7 @@
               v-model="personelData.email"
               label="E-mail"
               required
+              @keyup.enter="login()"
             ></v-text-field>
             <v-text-field
               prepend-icon="mdi-lock"
@@ -24,6 +25,7 @@
               :rules="[rules.required, rules.min]"
               hint="At least 8 characters"
               @click:append="show1 = !show1"
+              @keyup.enter="login()"
             ></v-text-field>
             <v-btn
               color="grey lighten-2"
@@ -64,7 +66,9 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch("login", { ...this.personelData, isUser: true });
+      if (this.valid) {
+        this.$store.dispatch("login", { ...this.personelData, isUser: true });
+      }
     },
   },
 };

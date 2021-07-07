@@ -11,6 +11,7 @@
               v-model="personelData.name"
               label="Name"
               required
+              @keyup.enter="register()"
             ></v-text-field>
             <v-text-field
               prepend-icon="mdi-account"
@@ -19,6 +20,7 @@
               v-model="personelData.lastname"
               label="Lastname"
               required
+              @keyup.enter="register()"
             ></v-text-field>
             <v-text-field
               prepend-icon="mdi-email"
@@ -27,6 +29,7 @@
               v-model="personelData.email"
               label="E-mail"
               required
+              @keyup.enter="register()"
             ></v-text-field>
             <v-text-field
               prepend-icon="mdi-lock"
@@ -40,6 +43,7 @@
               :rules="[rules.required, rules.min]"
               hint="At least 8 characters"
               @click:append="show = !show"
+              @keyup.enter="register()"
             ></v-text-field>
             <v-radio-group
               class="pl-7"
@@ -95,7 +99,9 @@ export default {
   },
   methods: {
     register() {
-      this.$store.dispatch("register", { ...this.personelData });
+      if (this.valid) {
+        this.$store.dispatch("register", { ...this.personelData });
+      }
     },
   },
 };
