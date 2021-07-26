@@ -148,12 +148,22 @@ export default {
     saveBodyInfo() {
       if (this.valid === true) {
         let fatRate;
-        fatRate =
-          495 /
-            (1.0324 -
-              0.19077 * Math.log10(this.info.waist - this.info.neck) +
-              0.15456 * Math.log10(this.info.height)) -
-          450;
+        if (this.$store.state.personelData.userSex === "male") {
+          fatRate =
+            495 /
+              (1.0324 -
+                0.19077 * Math.log10(this.info.waist - this.info.neck) +
+                0.15456 * Math.log10(this.info.height)) -
+            450;
+        } else {
+          fatRate =
+            495 /
+              (1.29579 -
+                0.35004 *
+                  Math.log10(this.info.waist + this.info.hip - this.info.neck) +
+                0.221 * Math.log10(this.info.height)) -
+            450;
+        }
         this.info.fatRate = fatRate.toFixed(1);
         this.$store.dispatch("saveBodyInfo", this.info);
         this.$router.push("/body");
