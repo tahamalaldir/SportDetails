@@ -6,7 +6,7 @@
       :color="snackbar.color"
       absolute
       right
-      top
+      bottom
     >
       {{ snackbar.text }}
       <template v-slot:action="{ attrs }">

@@ -11,8 +11,8 @@ export default new Vuex.Store({
     mini: false,
     snackbar: {
       show: false,
-      color: "error",
-      text: "Başarıyla eklendi",
+      color: "success",
+      text: "Added Successfully",
     },
     token: "",
     fbApiKey: "AIzaSyAmHs2HbOg-cDcj4vXSVYXuqd3G4iiI70s",
@@ -35,13 +35,6 @@ export default new Vuex.Store({
         state.mini = false;
       }
     },
-    changeSnackbar(state) {
-      if (state.snackbar === false) {
-        state.snackbar = true;
-      } else if (state.snackbar === true) {
-        state.snackbar = false;
-      }
-    },
     saveBodyInfo(state, payload) {
       let index = state.personelData.bodyInformation.findIndex(
         (c) => c.id == payload.id
@@ -50,10 +43,13 @@ export default new Vuex.Store({
         state.personelData.bodyInformation.push(payload);
         state.personelData.events.push({
           id: payload.id,
-          name: "Ölçüm yapıldı.",
+          name: "Body size taken",
           start: payload.picker,
           color: "blue",
         });
+        state.snackbar.text = "Body information added.";
+        state.snackbar.color = "success";
+        state.snackbar.show = true;
       }
     },
     deleteBodyInfo(state, payload) {
@@ -66,6 +62,9 @@ export default new Vuex.Store({
           (c) => c.id == payload.id
         );
         state.personelData.events.splice(eventIndex, 1);
+        state.snackbar.text = "Body information deleted.";
+        state.snackbar.color = "error";
+        state.snackbar.show = true;
       }
     },
     saveTrainingPrograms(state, payload) {
@@ -74,6 +73,9 @@ export default new Vuex.Store({
       );
       if (index < 0) {
         state.personelData.trainingPrograms.push(payload);
+        state.snackbar.text = "Training program added.";
+        state.snackbar.color = "success";
+        state.snackbar.show = true;
       }
     },
     deleteTrainingPrograms(state, payload) {
@@ -82,6 +84,9 @@ export default new Vuex.Store({
       );
       if (index > -1) {
         state.personelData.trainingPrograms.splice(index, 1);
+        state.snackbar.text = "Training program deleted.";
+        state.snackbar.color = "error";
+        state.snackbar.show = true;
       }
     },
     saveTrainingDetails(state, payload) {
@@ -92,10 +97,13 @@ export default new Vuex.Store({
         state.personelData.trainingDetails.push(payload);
         state.personelData.events.push({
           id: payload.id,
-          name: "Training yapıldı.",
+          name: "Training done",
           start: payload.date,
           color: "green",
         });
+        state.snackbar.text = "Training details added.";
+        state.snackbar.color = "success";
+        state.snackbar.show = true;
       }
     },
     deleteTrainingDetails(state, payload) {
@@ -108,6 +116,9 @@ export default new Vuex.Store({
           (c) => c.id == payload.id
         );
         state.personelData.events.splice(eventIndex, 1);
+        state.snackbar.text = "Training details deleted.";
+        state.snackbar.color = "error";
+        state.snackbar.show = true;
       }
     },
     userRegister(state, payload) {
