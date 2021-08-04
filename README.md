@@ -30,6 +30,13 @@ yarn install or npm install
 yarn serve or npm run serve
 ```
 
+Once you download the project. You need two things for this project to work:
+
+1. A [Firebase](https://firebase.google.com/products-build) web project and your Firebase config credentials.
+2. Enable Email/Password sign-in method in Firebase console.
+
+Once you get your credentials, open `src/firebase.js` file and fill the related variables with your own credentials.
+
 ## License
 
 This project uses MIT license.
