@@ -1,6 +1,6 @@
 # Sport Details
 
-This is a simple project made for learning purposes.
+This is a simple project keep for fitness and body information
 
 [Live App](https://sportdetails-bba16.web.app)
 
@@ -17,6 +17,13 @@ I used:
 - [Vue Router](https://router.vuejs.org/) for routing
 - [Vuex](https://vuex.vuejs.org/) for state management
 - [Firebase](https://firebase.google.com/) for authentication and firestore
+
+If you want to test without being a member
+
+```
+E-mail: test@gmail.com
+Password: test1234
+```
 
 ## Installation
 
