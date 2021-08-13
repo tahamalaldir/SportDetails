@@ -22,7 +22,6 @@
         :type="type"
         :events="events"
         :event-color="getEventColor"
-        @change="events"
       ></v-calendar>
     </v-sheet>
   </v-col>
@@ -45,7 +44,6 @@ export default {
     setToday() {
       this.value = new Date().toISOString().substr(0, 10);
     },
-
     getEventColor(event) {
       return event.color;
     },
