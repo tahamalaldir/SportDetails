@@ -37,6 +37,10 @@ const routes = [
   },
   {
     path: "/",
+    redirect: "/dashboard",
+  },
+  {
+    path: "/dashboard",
     name: "Dashboard",
     component: Home,
     beforeEnter(to, from, next) {

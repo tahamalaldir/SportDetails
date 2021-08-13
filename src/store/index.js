@@ -152,7 +152,7 @@ export default new Vuex.Store({
           let timerSecond = +expirationDate - time;
           dispatch("setTimeoutTimer", timerSecond);
           dispatch("getAllData", id);
-          router.push("/");
+          router.push("/dashboard");
         }
       } else {
         router.push("/login");
@@ -179,7 +179,7 @@ export default new Vuex.Store({
           );
           localStorage.setItem("id", response.data.localId);
           dispatch("setTimeoutTimer", response.data.expiresIn * 10000);
-          router.push("/");
+          router.push("/dashboard");
         });
     },
     // eslint-disable-next-line no-unused-vars
