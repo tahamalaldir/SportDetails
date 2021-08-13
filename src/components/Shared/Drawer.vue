@@ -74,7 +74,7 @@ export default {
       ],
       auth: [
         { title: "Login", icon: "mdi-account", link: "/login" },
-        { title: "Register", icon: "mdi-account", link: "/register" },
+        { title: "Register", icon: "mdi-account-plus", link: "/register" },
       ],
     };
   },

@@ -1,8 +1,15 @@
 <template>
   <v-container
     ><v-row class="justify-center">
-      <v-col md="7">
-        <v-card elevation="24" color="grey darken-4" dark outlined class="pa-4">
+      <v-col cols="12" md="5">
+        <v-card
+          elevation="16"
+          color="grey darken-4"
+          dark
+          outlined
+          class="pa-4"
+          height="100%"
+        >
           <v-form ref="form" v-model="valid">
             <v-text-field
               prepend-icon="mdi-account"
@@ -46,7 +53,7 @@
               @keyup.enter="register()"
             ></v-text-field>
             <v-radio-group
-              class="pl-7"
+              prepend-icon="mdi-gender-male-female"
               row
               v-model="personelData.sex"
               :mandatory="false"
@@ -58,7 +65,7 @@
               color="grey lighten-2"
               :disabled="!valid"
               @click="register()"
-              class="black--text"
+              class="black--text float-right mb-2"
               elevation="3"
             >
               Submit
@@ -66,6 +73,11 @@
           </v-form>
         </v-card>
       </v-col>
+      <v-col cols="12" class="text-center"
+        ><v-btn outlined rounded class="mt-6" to="login"
+          >Do you have an account?</v-btn
+        ></v-col
+      >
     </v-row></v-container
   >
 </template>
