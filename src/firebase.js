@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/firebase-auth";
 
 let config = {
   apiKey: "",
@@ -12,8 +13,8 @@ let config = {
   measurementId: "",
 };
 
-firebase.initializeApp(config);
+const fb = firebase.initializeApp(config);
 const db = firebase.firestore();
 db.settings({ timestampsInSnapshots: true });
 
-export default db;
+export { fb, db };

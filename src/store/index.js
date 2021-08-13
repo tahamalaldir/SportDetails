@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 import router from "../router";
 //import { uuid } from "vue-uuid";
-import db from "@/firebase.js";
+import { db } from "@/firebase.js";
 Vue.use(Vuex);
 
 export default new Vuex.Store({

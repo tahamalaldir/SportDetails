@@ -45,15 +45,46 @@
         </v-form>
       </v-card>
     </v-col>
-    <v-col cols="12" class="text-center"
-      ><v-btn outlined rounded class="mt-6" to="register"
-        >Create New Account</v-btn
-      ></v-col
-    >
+    <v-col cols="12" class="text-center mt-6">
+      <v-dialog v-model="dialog" persistent max-width="300px" dark>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn outlined rounded v-bind="attrs" v-on="on" class="mr-3">
+            Forgot Password?
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="text-h5">Reset Password</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="forgetMail"
+                    color="dark"
+                    :rules="emailRules"
+                    label="E-mail"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn text @click="dialog = false"> Close </v-btn>
+            <v-btn outlined @click="resetPassword()"> Save </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-btn outlined rounded to="register">Create New Account</v-btn>
+    </v-col>
   </v-row>
 </template>
 
 <script>
+import { fb } from "@/firebase.js";
 export default {
   name: "login",
   data() {
@@ -62,6 +93,8 @@ export default {
         email: "",
         password: "",
       },
+      forgetMail: "",
+      dialog: false,
       valid: true,
       show1: "",
       rules: {
@@ -79,6 +112,23 @@ export default {
       if (this.valid) {
         this.$store.dispatch("login", { ...this.personelData, isUser: true });
       }
+    },
+    resetPassword() {
+      const auth = fb.auth();
+      auth
+        .sendPasswordResetEmail(this.forgetMail)
+        .then(() => {
+          this.$store.state.snackbar.show = true;
+          this.$store.state.snackbar.text = "Mail sent";
+          this.$store.state.snackbar.color = "success";
+          this.dialog = false;
+          this.forgetMail = "";
+        })
+        .catch(() => {
+          alert("Mail bulunamadı veya yanlış...");
+          this.dialog = false;
+          this.forgetMail = "";
+        });
     },
   },
 };
