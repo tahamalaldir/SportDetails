@@ -286,5 +286,8 @@ export default new Vuex.Store({
     getDetails: (state) => {
       return state.personelData.trainingDetails;
     },
+    getEvents: (state) => {
+      return state.personelData.events;
+    },
   },
 });

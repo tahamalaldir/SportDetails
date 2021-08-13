@@ -22,7 +22,7 @@
         :type="type"
         :events="events"
         :event-color="getEventColor"
-        @change="getEvents"
+        @change="events"
       ></v-calendar>
     </v-sheet>
   </v-col>
@@ -33,15 +33,19 @@ export default {
     type: "month",
     weekday: [1, 2, 3, 4, 5, 6, 0],
     value: "",
-    events: [],
   }),
+  computed: {
+    events: {
+      get() {
+        return this.$store.getters.getEvents;
+      },
+    },
+  },
   methods: {
     setToday() {
       this.value = new Date().toISOString().substr(0, 10);
     },
-    getEvents() {
-      this.events = this.$store.state.personelData.events;
-    },
+
     getEventColor(event) {
       return event.color;
     },
