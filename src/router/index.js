@@ -179,7 +179,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} | Sport Details`;
+  document.title = `${to.meta.title} / Sport Details`;
   next();
 });
 export default router;
